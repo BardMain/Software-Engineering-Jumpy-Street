@@ -46,6 +46,7 @@ public class GridMoveScript : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
         {
             nextPos = Vector3.back;
+            destination.x = Rounded(destination.x);
             currentDir = down;
             canMove = true;
         }
@@ -65,9 +66,15 @@ public class GridMoveScript : MonoBehaviour
         if (Vector3.Distance(destination, transform.position) <= .0001f)
         {
             transform.localEulerAngles = currentDir;
-            if (canMove)
+            if (canMove && Valid())
             {
-                if (Valid())
+                if (currentDir == up || currentDir == down)
+                {
+                    destination = transform.position + nextPos;
+                    destination.x = Rounded(destination.x);
+                    canMove = false;
+                }
+                else
                 {
                     destination = transform.position + nextPos;
 
@@ -93,6 +100,12 @@ public class GridMoveScript : MonoBehaviour
             }
         }
         return true;
+    }
+
+    private float Rounded(float target)
+    {
+        target = Mathf.Round(target);
+        return target;
     }
 
 }
