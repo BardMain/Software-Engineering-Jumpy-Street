@@ -4,15 +4,16 @@ using UnityEngine;
 
 public class GridMoveScript : MonoBehaviour
 {
-    private Vector3 up = new Vector3(-90, 0, 0),
-        right = new Vector3(-90, 90, 0),
-        down = new Vector3(-90, 180, 0),
-        left = new Vector3(-90, 270, 0),
-        currentDir = new Vector3(-90, 0, 0);
+    //Rotation direction for x needs to be minus 90 since the model is not rotated
+    private Vector3 up = Vector3.zero,
+        right = new Vector3(0, 90, 0),
+        down = new Vector3(0, 180, 0),
+        left = new Vector3(0, 270, 0),
+        currentDir = Vector3.zero;
 
     private Vector3 nextPos, destination, diection;
 
-    private float speed = 5f;
+    private float speed = 4f;
 
     private bool canMove;
 
