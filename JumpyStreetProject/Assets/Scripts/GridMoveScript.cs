@@ -52,7 +52,8 @@ public class GridMoveScript : MonoBehaviour
                 if (currentDir == up || currentDir == down)
                 {
                     destination = transform.position + nextPos;
-                    Mathf.Round(destination.x);
+                    destination.x = Mathf.Round(destination.x);
+                    Debug.Log(destination.x);
                     canMove = false;
                 }
                 else
