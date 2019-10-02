@@ -6,15 +6,18 @@ using UnityEngine.SceneManagement;
 
 public class mainMenuScript : MonoBehaviour
 {
+    ///Texts
     public Text titleText;
 
+    /// Buttons
     public Button startButton;
     public Button quitButton;
     public Button howToButton;
     public Button closeButton;
+
+    ///Game Objects
     public GameObject selectCloseButton;
     public GameObject howCloseButton;
-
     public GameObject mainPanel;
     public GameObject charSelectPanel;
     public GameObject howToPanel;
@@ -23,11 +26,10 @@ public class mainMenuScript : MonoBehaviour
     public GameObject noButton;
     public GameObject charSelectCloseButton;
     public GameObject howToCloseButton;
-    //public GameObject 
 
+    ///Audio
     public AudioClip bg;
     
-
     public void Start()
     {
         charSelectPanel.SetActive(false);
@@ -66,11 +68,5 @@ public class mainMenuScript : MonoBehaviour
     {
         Application.Quit();
         Debug.Log("Application Closed");
-    }
-
-
-    void Update()
-    {
-        
     }
 }
