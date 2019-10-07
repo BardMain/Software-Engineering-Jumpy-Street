@@ -18,11 +18,13 @@ public class GridMoveScript : MonoBehaviour
     private float rayLength = 1f;
 
     private bool canMove;
+    private bool alive;
 
     
 
     void Start()
     {
+        alive = true;
         currentDir = up;
         nextPos = Vector3.forward;
         destination = transform.position;
@@ -30,7 +32,10 @@ public class GridMoveScript : MonoBehaviour
 
     void Update()
     {
-        Move();
+        if (alive)
+        {
+            Move();
+        }
     }
 
     //Handles where you gonna move
@@ -112,6 +117,20 @@ public class GridMoveScript : MonoBehaviour
             }
         }
         return true;
+    }
+
+    //Collider, use this when hitting an obstacle
+    private void OnTriggerEnter(Collider other)
+    {
+        Debug.Log("Hey I'm colliding over hea!");
+
+        if(other.gameObject.tag == "Killer")
+        {
+            Debug.Log("you ded man");
+            this.transform.localScale = new Vector3(1.5f, .3f, 1.5f);
+            alive = false;
+            //Put a death transition here
+        }
     }
 
 }
