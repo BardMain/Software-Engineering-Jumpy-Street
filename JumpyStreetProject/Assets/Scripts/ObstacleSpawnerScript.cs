@@ -38,7 +38,6 @@ public class ObstacleSpawnerScript : MonoBehaviour
             StartCoroutine(SpawnObstacles(pos));
         }
 
-        //This isn't actually working for some reason
         Invoke("CheckForSpawns", maxTime);
     }
 
