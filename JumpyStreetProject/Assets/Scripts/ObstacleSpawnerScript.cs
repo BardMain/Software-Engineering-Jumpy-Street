@@ -26,9 +26,8 @@ public class ObstacleSpawnerScript : MonoBehaviour
 
     private void CheckForSpawns()
     {
-        Debug.Log("checking now");
-        //put something to find spawn points here
-        rdSpawns = GameObject.FindGameObjectsWithTag("ObsSpwnRd");
+        //Debug.Log("checking now");
+        rdSpawns = GameObject.FindGameObjectsWithTag("ObsSpwnRd"); //Checks for what spawn points are available
 
         //The rest spawns obstacles from currently existing spawn points
         //Does so at staggered times
@@ -68,6 +67,7 @@ public class ObstacleSpawnerScript : MonoBehaviour
         {
             Debug.Log("Man, what did you do now?");
         }
+        //Spawns the objects and sets their rotation and direction
         GameObject newObj = Instantiate(roadObstacles[toSpawn], pos, Quaternion.identity);
         newObj.transform.localEulerAngles = rotation;
         spawnedRdObj.Add(newObj);
@@ -89,6 +89,7 @@ public class ObstacleSpawnerScript : MonoBehaviour
                 toDelete = x;
             }
         }
+        //If an object is out of bounds will delete it, need to rework to object pool instead
         if(toDelete > -1)
         {
             Destroy(spawnedRdObj[toDelete]);
