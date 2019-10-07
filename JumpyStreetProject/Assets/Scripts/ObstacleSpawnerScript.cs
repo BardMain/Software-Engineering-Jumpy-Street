@@ -11,6 +11,7 @@ public class ObstacleSpawnerScript : MonoBehaviour
 
     private float minTime = .5f;
     private float maxTime = 2f;
+    private float gameEdge = 4f;
 
     // Start is called before the first frame update
     void Start()
@@ -38,7 +39,7 @@ public class ObstacleSpawnerScript : MonoBehaviour
         }
 
         //This isn't actually working for some reason
-        Invoke("CheckForSpawns()", 2000);
+        Invoke("CheckForSpawns", maxTime);
     }
 
     //Spawns objects and sets their direction based on spawn pos
@@ -84,7 +85,7 @@ public class ObstacleSpawnerScript : MonoBehaviour
             Vector3 toMove = Vector3.zero;
             toMove.x = obsDirections[x] * Time.deltaTime;
             spawnedRdObj[x].transform.position += toMove;
-            if(currentX > 4 || currentX < -4)
+            if(currentX > gameEdge || currentX < -gameEdge)
             {
                 toDelete = x;
             }
