@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class GridMoveScript : MonoBehaviour
 {
+    public GameObject[] playerModels = new GameObject[4];
+
     //gets relative directions
     private Vector3 up = Vector3.zero,
         right = new Vector3(0, 90, 0),
@@ -20,7 +22,7 @@ public class GridMoveScript : MonoBehaviour
     private bool canMove;
     private bool alive;
 
-    
+    private int modelChoice;
 
     void Start()
     {
@@ -28,6 +30,8 @@ public class GridMoveScript : MonoBehaviour
         currentDir = up;
         nextPos = Vector3.forward;
         destination = transform.position;
+        modelChoice = 0;
+        ChooseModel();
     }
 
     void Update()
@@ -36,6 +40,11 @@ public class GridMoveScript : MonoBehaviour
         {
             Move();
         }
+    }
+
+    private void ChooseModel()
+    {
+
     }
 
     //Handles where you gonna move
@@ -71,6 +80,7 @@ public class GridMoveScript : MonoBehaviour
             
         }
     }
+
 
     //Gets your inputs
     private void GetInputs()
