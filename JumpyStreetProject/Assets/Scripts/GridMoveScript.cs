@@ -31,7 +31,7 @@ public class GridMoveScript : MonoBehaviour
     {
         modelChoice = 1;
         alive = true;
-        onLand = false;
+        onLand = true;
         onLog = false;
         currentDir = up;
         nextPos = Vector3.forward;
