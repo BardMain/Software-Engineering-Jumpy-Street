@@ -24,12 +24,14 @@ public class GridMoveScript : MonoBehaviour
     private bool onLand;
     private bool onLog;
 
-    private int modelChoice;
+    [HideInInspector]
+    public int modelChoice;
 
     void Start()
     {
+        modelChoice = 1;
         alive = true;
-        onLand = true;
+        onLand = false;
         onLog = false;
         currentDir = up;
         nextPos = Vector3.forward;
