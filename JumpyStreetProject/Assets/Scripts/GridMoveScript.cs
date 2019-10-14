@@ -21,30 +21,47 @@ public class GridMoveScript : MonoBehaviour
 
     private bool canMove;
     private bool alive;
+    private bool onLand;
+    private bool onLog;
 
     private int modelChoice;
 
     void Start()
     {
         alive = true;
+        onLand = true;
+        onLog = false;
         currentDir = up;
         nextPos = Vector3.forward;
         destination = transform.position;
         modelChoice = 0;
-        ChooseModel();
+        HidePlayerModels();
+        ChooseModel(); //need to only do this once we have the proper value set
     }
 
     void Update()
     {
+        if(!onLand && !onLog)
+        {
+            Death("splash");
+        }
         if (alive)
         {
             Move();
         }
     }
 
+    private void HidePlayerModels()
+    {
+        for(int x = 0; x < playerModels.Length; x++)
+        {
+            playerModels[x].SetActive(false);
+        }
+    }
+
     private void ChooseModel()
     {
-
+        playerModels[modelChoice].SetActive(true);
     }
 
     //Handles where you gonna move
@@ -80,7 +97,6 @@ public class GridMoveScript : MonoBehaviour
             
         }
     }
-
 
     //Gets your inputs
     private void GetInputs()
@@ -136,11 +152,49 @@ public class GridMoveScript : MonoBehaviour
 
         if(other.gameObject.tag == "Killer")
         {
-            Debug.Log("you ded man");
-            this.transform.localScale = new Vector3(1.5f, .3f, 1.5f);
-            alive = false;
-            //Put a death transition here
+            Death("splat");
         }
+        if (other.gameObject.tag == "Land")
+        {
+            onLand = true;
+        }
+        if (other.gameObject.tag == "Floater")
+        {
+            onLog = true;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.tag == "Land")
+        {
+            onLand = false;
+        }
+        if (other.gameObject.tag == "Floater")
+        {
+            onLog = false;
+        }
+    }
+
+    //Everything that happens in death should occur here
+    private void Death(string death)
+    {
+        Debug.Log("you ded man");
+        switch (death)
+        {
+            case "splat":
+                this.transform.localScale = new Vector3(1.5f, .3f, 1.5f);
+                alive = false;
+                break;
+            case "splash":
+                nextPos = Vector3.down;
+                destination = transform.position + nextPos;
+                canMove = false;
+                transform.position = Vector3.MoveTowards(transform.position, destination, speed * Time.deltaTime);
+                alive = false;
+                break;
+        }
+        
     }
 
 }

@@ -6,8 +6,10 @@ TagManager:
   tags:
   - Wall
   - Killer
-  - ObsSpawnPoint
   - ObsSpwnRd
+  - WaterSpwnPnt
+  - Floater
+  - Land
   layers:
   - Default
   - TransparentFX

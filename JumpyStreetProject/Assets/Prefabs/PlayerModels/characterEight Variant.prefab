@@ -10,7 +10,7 @@ PrefabInstance:
     - target: {fileID: -927199367670048503, guid: 21422aea17d9a424dabbb10e4991a12c,
         type: 3}
       propertyPath: m_Name
-      value: characterEight
+      value: characterEight Variant
       objectReference: {fileID: 0}
     - target: {fileID: -8627010741751703675, guid: 21422aea17d9a424dabbb10e4991a12c,
         type: 3}
