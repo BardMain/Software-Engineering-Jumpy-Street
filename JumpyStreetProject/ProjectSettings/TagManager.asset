@@ -5,6 +5,11 @@ TagManager:
   serializedVersion: 2
   tags:
   - Wall
+  - Killer
+  - ObsSpwnRd
+  - WaterSpwnPnt
+  - Floater
+  - Land
   layers:
   - Default
   - TransparentFX

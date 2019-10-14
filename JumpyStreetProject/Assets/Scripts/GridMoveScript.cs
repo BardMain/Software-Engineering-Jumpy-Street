@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class GridMoveScript : MonoBehaviour
 {
+    public GameObject[] playerModels = new GameObject[4];
+
     //gets relative directions
     private Vector3 up = Vector3.zero,
         right = new Vector3(0, 90, 0),
@@ -18,19 +20,50 @@ public class GridMoveScript : MonoBehaviour
     private float rayLength = 1f;
 
     private bool canMove;
+    private bool alive;
+    private bool onLand;
+    private bool onLog;
 
-    
+    [HideInInspector]
+    public int modelChoice;
 
     void Start()
     {
+        modelChoice = 1;
+        alive = true;
+        onLand = false;
+        onLog = false;
         currentDir = up;
         nextPos = Vector3.forward;
         destination = transform.position;
+        modelChoice = 0;
+        HidePlayerModels();
+        ChooseModel(); //need to only do this once we have the proper value set
     }
 
     void Update()
     {
-        Move();
+        if(!onLand && !onLog)
+        {
+            Death("splash");
+        }
+        if (alive)
+        {
+            Move();
+        }
+    }
+
+    private void HidePlayerModels()
+    {
+        for(int x = 0; x < playerModels.Length; x++)
+        {
+            playerModels[x].SetActive(false);
+        }
+    }
+
+    private void ChooseModel()
+    {
+        playerModels[modelChoice].SetActive(true);
     }
 
     //Handles where you gonna move
@@ -112,6 +145,58 @@ public class GridMoveScript : MonoBehaviour
             }
         }
         return true;
+    }
+
+    //Collider, use this when hitting an obstacle
+    private void OnTriggerEnter(Collider other)
+    {
+        Debug.Log("Hey I'm colliding over hea!");
+
+        if(other.gameObject.tag == "Killer")
+        {
+            Death("splat");
+        }
+        if (other.gameObject.tag == "Land")
+        {
+            onLand = true;
+        }
+        if (other.gameObject.tag == "Floater")
+        {
+            onLog = true;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.tag == "Land")
+        {
+            onLand = false;
+        }
+        if (other.gameObject.tag == "Floater")
+        {
+            onLog = false;
+        }
+    }
+
+    //Everything that happens in death should occur here
+    private void Death(string death)
+    {
+        Debug.Log("you ded man");
+        switch (death)
+        {
+            case "splat":
+                this.transform.localScale = new Vector3(1.5f, .3f, 1.5f);
+                alive = false;
+                break;
+            case "splash":
+                nextPos = Vector3.down;
+                destination = transform.position + nextPos;
+                canMove = false;
+                transform.position = Vector3.MoveTowards(transform.position, destination, speed * Time.deltaTime);
+                alive = false;
+                break;
+        }
+        
     }
 
 }
