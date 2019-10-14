@@ -99,13 +99,13 @@ public class ObstacleSpawnerScript : MonoBehaviour
         //going left
         if (pos.x > 0)
         {
-            direction = -5f;
+            direction = -4f;
             rotation = new Vector3(0, 270, 0);
         }
         //going right
         else if (pos.x < 0)
         {
-            direction = 5f;
+            direction = 4f;
             rotation = new Vector3(0, 90, 0);
         }
         //Uh oh

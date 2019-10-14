@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class GridMoveScript : MonoBehaviour
 {
+    public GridMoveScript instance;
     public GameObject[] playerModels = new GameObject[4];
 
     //gets relative directions
@@ -21,22 +22,35 @@ public class GridMoveScript : MonoBehaviour
 
     private bool canMove;
     private bool alive;
-    private bool onLand;
-    private bool onLog;
+
+    [HideInInspector]
+    public bool onLand;
+    [HideInInspector]
+    public bool onLog;
 
     [HideInInspector]
     public int modelChoice;
 
     void Start()
     {
-        modelChoice = 1;
+        if (instance != null && instance != this)
+        {
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            instance = this;
+        }
+
+        modelChoice = 0;
         alive = true;
         onLand = true;
         onLog = false;
+
         currentDir = up;
         nextPos = Vector3.forward;
         destination = transform.position;
-        modelChoice = 0;
+        
         HidePlayerModels();
         ChooseModel(); //need to only do this once we have the proper value set
     }
@@ -194,6 +208,9 @@ public class GridMoveScript : MonoBehaviour
                 canMove = false;
                 transform.position = Vector3.MoveTowards(transform.position, destination, speed * Time.deltaTime);
                 alive = false;
+                break;
+            case "outtaBounds":
+
                 break;
         }
         
