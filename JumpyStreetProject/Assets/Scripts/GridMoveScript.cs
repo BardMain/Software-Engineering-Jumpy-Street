@@ -91,13 +91,13 @@ public class GridMoveScript : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
         {
-            nextPos = Vector3.right;
+            nextPos = Vector3.right + new Vector3(.5f,0,0);
             currentDir = right;
             canMove = true;
         }
         if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
         {
-            nextPos = Vector3.left;
+            nextPos = Vector3.left + new Vector3(-0.5f, 0, 0);
             currentDir = left;
             canMove = true;
         }
