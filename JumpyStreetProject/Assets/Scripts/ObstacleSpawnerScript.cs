@@ -13,9 +13,6 @@ public class ObstacleSpawnerScript : MonoBehaviour
     private float maxTime = 2f;
     private float gameEdge = 16f;
 
-    [SerializeField]
-    private GameObject player;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -25,7 +22,6 @@ public class ObstacleSpawnerScript : MonoBehaviour
     private void Update()
     {
         ObstacleMovement();
-        Camera.main.gameObject.transform.position = player.transform.position + new Vector3(1f, 3.5f, -0.9f);
     }
 
     private void CheckForSpawns()

@@ -20,7 +20,8 @@ public class GridMoveScript : MonoBehaviour
     private bool canMove;
     private bool alive;
 
-    
+    [SerializeField]
+    private GameObject player;
 
     void Start()
     {
@@ -35,6 +36,7 @@ public class GridMoveScript : MonoBehaviour
         if (alive)
         {
             Move();
+            Camera.main.gameObject.transform.position = player.transform.position + new Vector3(1f, 6f, 0.83f);
         }
     }
 
