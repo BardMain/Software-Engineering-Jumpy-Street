@@ -60,7 +60,7 @@ public class GridMoveScript : MonoBehaviour
                 {
                     destination = transform.position + nextPos;
                     destination.x = Mathf.Round(destination.x);
-                    Debug.Log(destination.x);
+                    //Debug.Log(destination.x);
                     canMove = false;
                 }
                 else
