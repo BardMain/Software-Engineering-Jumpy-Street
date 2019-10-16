@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class ObstacleSpawnerScript : MonoBehaviour
 {
+    public static ObstacleSpawnerScript instance;
+
     public GameObject[] roadObstacles = new GameObject[1];
     private List<float> rdDirections = new List<float>();
     private List<GameObject> spawnedRdObj = new List<GameObject>();
@@ -16,11 +18,20 @@ public class ObstacleSpawnerScript : MonoBehaviour
 
     private float minTime = .5f;
     private float maxTime = 2f;
-    private float gameEdge = 8f;
+    private float gameEdge = 10f;
 
     // Start is called before the first frame update
     void Start()
     {
+        if (instance != null && instance != this)
+        {
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            instance = this;
+        }
+
         CheckForSpawns();
     }
 
@@ -99,13 +110,13 @@ public class ObstacleSpawnerScript : MonoBehaviour
         //going left
         if (pos.x > 0)
         {
-            direction = -4f;
+            direction = -3f;
             rotation = new Vector3(0, 270, 0);
         }
         //going right
         else if (pos.x < 0)
         {
-            direction = 4f;
+            direction = 3f;
             rotation = new Vector3(0, 90, 0);
         }
         //Uh oh
@@ -161,6 +172,22 @@ public class ObstacleSpawnerScript : MonoBehaviour
             waterDirections.RemoveAt(toDeleteWater);
         }
     }
+    
+    //The player is gonna use this to find the direction to go on a log
+    public float HandOverThatFloat(Collider other)
+    {
+        float theChosenOne = 0f;
+        int thisOne = 0;
 
+        for(int x = 0; x < spawnedWaterObj.Count; x++)
+        {
+            if(other.transform == spawnedWaterObj[x].transform)
+            {
+                thisOne = x;
+            }
+        }
+        theChosenOne = waterDirections[thisOne];
+        return (theChosenOne);
+    }
 
 }

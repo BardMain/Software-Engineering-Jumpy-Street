@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GridMoveScript : MonoBehaviour
 {
-    public GridMoveScript instance;
+    public static GridMoveScript instance;
     public GameObject[] playerModels = new GameObject[4];
 
     //gets relative directions
@@ -19,6 +19,7 @@ public class GridMoveScript : MonoBehaviour
 
     private float speed = 4f;
     private float rayLength = 1f;
+    private float inheritedSpeed = 0f;
 
     private bool canMove;
     private bool alive;
@@ -59,11 +60,20 @@ public class GridMoveScript : MonoBehaviour
     {
         if(!onLand && !onLog)
         {
-            Death("splash");
+            float roundedZ = Mathf.Round(transform.position.z);
+
+            if (roundedZ != transform.position.z)
+            {
+                Death("splash");
+            }
         }
         if (alive)
         {
             Move();
+        }
+        if (onLog)
+        {
+            LogMove();
         }
     }
 
@@ -96,11 +106,13 @@ public class GridMoveScript : MonoBehaviour
                 //Only corrects your horizontal placement if you are moving up our down
                 //This allows us to avoid needing nodes to place player on while keeping
                 //the player from crashing into a wall they are halfway through
-                if (currentDir == up || currentDir == down)
+                float roundedZ = Mathf.Round(transform.position.z);
+
+                if (roundedZ != transform.position.z)
                 {
                     destination = transform.position + nextPos;
                     destination.x = Mathf.Round(destination.x);
-                    Debug.Log(destination.x);
+                    //Debug.Log(destination.x);
                     canMove = false;
                 }
                 else
@@ -111,6 +123,24 @@ public class GridMoveScript : MonoBehaviour
                 }
             }
             
+        }
+    }
+
+    private void LogMove()
+    {
+        float roundedZ = Mathf.Round(transform.position.z);
+
+        if(roundedZ == transform.position.z)
+        {
+            Vector3 toMove = Vector3.zero;
+            toMove.x = inheritedSpeed * Time.deltaTime;
+            destination += toMove;
+            //Debug.Log("I have moved " + toMove.x + " Since last time");
+
+        }
+        else
+        {
+            //Debug.Log("I am moving up and down, don't bug me");
         }
     }
 
@@ -164,7 +194,7 @@ public class GridMoveScript : MonoBehaviour
     //Collider, use this when hitting an obstacle
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Hey I'm colliding over hea!");
+        //Debug.Log("Hey I'm colliding over hea!");
 
         if(other.gameObject.tag == "Killer")
         {
@@ -176,6 +206,11 @@ public class GridMoveScript : MonoBehaviour
         }
         if (other.gameObject.tag == "Floater")
         {
+            if (!onLog)
+            {
+                inheritedSpeed = ObstacleSpawnerScript.instance.HandOverThatFloat(other);
+                Debug.Log("The inherited speed should be " + inheritedSpeed);
+            }
             onLog = true;
         }
     }
@@ -211,6 +246,9 @@ public class GridMoveScript : MonoBehaviour
                 break;
             case "outtaBounds":
 
+                break;
+            default:
+                Debug.Log("hey, how'd you end up dead anyway?");
                 break;
         }
         
