@@ -6,8 +6,14 @@ using UnityEngine.SceneManagement;
 
 public class mainMenuScript : MonoBehaviour
 {
+    //Int values
+   public int score = 0;
+  
+
+
     ///Texts
     public Text titleText;
+    public Text scoreText;
 
     /// Buttons
     public Button startButton;
@@ -68,5 +74,13 @@ public class mainMenuScript : MonoBehaviour
     {
         Application.Quit();
         Debug.Log("Application Closed");
+    }
+
+
+    //HANDLING SCORE
+    public void PlayerScoring()
+    {
+        score++;
+        scoreText.text = "Your Score " + score;
     }
 }
