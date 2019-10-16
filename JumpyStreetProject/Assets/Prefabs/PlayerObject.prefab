@@ -780,6 +780,8 @@ GameObject:
   m_Component:
   - component: {fileID: 7415220175582862386}
   - component: {fileID: 1029897468479481301}
+  - component: {fileID: 1162015943}
+  - component: {fileID: 1162015942}
   m_Layer: 0
   m_Name: PlayerObject
   m_TagString: Untagged
@@ -822,6 +824,38 @@ MonoBehaviour:
   - {fileID: 3732344213439886369}
   - {fileID: 3810757394454645399}
   - {fileID: 8410985102274057366}
+  onLand: 0
+  onLog: 0
+  modelChoice: 0
+--- !u!54 &1162015943
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 999701128455424703}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!65 &1162015942
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 999701128455424703}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.1, y: 2, z: 0.1}
+  m_Center: {x: 0, y: -1, z: 0}
 --- !u!1 &1210500490895706487
 GameObject:
   m_ObjectHideFlags: 0
@@ -2330,7 +2364,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1360742231623180085
 Transform:
   m_ObjectHideFlags: 0
