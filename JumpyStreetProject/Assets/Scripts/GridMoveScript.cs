@@ -24,6 +24,7 @@ public class GridMoveScript : MonoBehaviour
     private bool canMove;
     private bool alive;
 
+<<<<<<< HEAD
     [HideInInspector]
     public bool onLand;
     [HideInInspector]
@@ -31,6 +32,10 @@ public class GridMoveScript : MonoBehaviour
 
     [HideInInspector]
     public int modelChoice;
+=======
+    [SerializeField]
+    private GameObject player;
+>>>>>>> NelsonStart
 
     void Start()
     {
@@ -70,6 +75,7 @@ public class GridMoveScript : MonoBehaviour
         if (alive)
         {
             Move();
+            Camera.main.gameObject.transform.position = player.transform.position + new Vector3(1f, 6f, 0.83f);
         }
         if (onLog)
         {
