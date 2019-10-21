@@ -11,6 +11,7 @@ public class ObstacleSpawnerScript : MonoBehaviour
     private List<GameObject> spawnedRdObj = new List<GameObject>();
     private GameObject[] rdSpawns;
 
+<<<<<<< HEAD
     public GameObject[] waterObstacles = new GameObject[1];
     private List<float> waterDirections = new List<float>();
     private List<GameObject> spawnedWaterObj = new List<GameObject>();
@@ -19,6 +20,11 @@ public class ObstacleSpawnerScript : MonoBehaviour
     private float minTime = .5f;
     private float maxTime = 2f;
     private float gameEdge = 10f;
+=======
+    private float minTime = .8f;
+    private float maxTime = 2f;
+    private float gameEdge = 16f;
+>>>>>>> NelsonStart
 
     // Start is called before the first frame update
     void Start()
