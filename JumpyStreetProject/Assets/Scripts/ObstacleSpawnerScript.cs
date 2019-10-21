@@ -9,12 +9,12 @@ public class ObstacleSpawnerScript : MonoBehaviour
     public GameObject[] roadObstacles = new GameObject[1];
     private List<float> rdDirections = new List<float>();
     private List<GameObject> spawnedRdObj = new List<GameObject>();
-    private GameObject[] rdSpawns;
+    private GameObject[] rdSpawns = new GameObject[0];
 
     public GameObject[] waterObstacles = new GameObject[1];
     private List<float> waterDirections = new List<float>();
     private List<GameObject> spawnedWaterObj = new List<GameObject>();
-    private GameObject[] waterSpawns;
+    private GameObject[] waterSpawns = new GameObject[0];
 
     private float minTime = .5f;
     private float maxTime = 2f;
@@ -42,6 +42,8 @@ public class ObstacleSpawnerScript : MonoBehaviour
 
     private void CheckForSpawns()
     {
+        DeleteFarAway();
+
         //Debug.Log("checking now");
         rdSpawns = GameObject.FindGameObjectsWithTag("ObsSpwnRd"); //Checks for what road spawn points are available
         waterSpawns = GameObject.FindGameObjectsWithTag("WaterSpwnPnt"); //Checks for what water spawn points are available
@@ -188,6 +190,57 @@ public class ObstacleSpawnerScript : MonoBehaviour
         }
         theChosenOne = waterDirections[thisOne];
         return (theChosenOne);
+    }
+
+    //shows how far away player is from spawns
+    private float ComparedDist(GameObject toCompare)
+    {
+        float dist = GridMoveScript.instance.transform.position.z - toCompare.transform.position.z;
+
+        return (dist);
+    }
+
+    //any spawns more than 5 units away are deleted
+    private void DeleteFarAway()
+    {
+        int toDeleteRd = -1;
+        int toDeleteWater = -1;
+        if (rdSpawns.Length > 1)
+        {
+            for (int x = 0; x < rdSpawns.Length; x++)
+            {
+                float dist = ComparedDist(rdSpawns[x]);
+                if(dist > 5)
+                {
+                    toDeleteRd = x;
+                    //Destroy(rdSpawns[x]);
+                }
+            }
+        }
+
+        if(toDeleteRd > -1)
+        {
+            Destroy(rdSpawns[toDeleteRd]);
+        }
+
+        if(waterSpawns.Length > 1)
+        {
+            for (int x = 0; x < waterSpawns.Length; x++)
+            {
+                float dist = ComparedDist(waterSpawns[x]);
+                if (dist > 5)
+                {
+                    toDeleteWater = x;
+                    //Destroy(waterSpawns[x]);
+                }
+            }
+        }
+
+        if (toDeleteWater > -1)
+        {
+            Destroy(waterSpawns[toDeleteWater]);
+        }
+
     }
 
 }

@@ -21,6 +21,9 @@ public class GridMoveScript : MonoBehaviour
     private float rayLength = 1f;
     private float inheritedSpeed = 0f;
 
+    [HideInInspector]
+    public float score;
+
     private bool canMove;
     private bool alive;
 
@@ -62,7 +65,7 @@ public class GridMoveScript : MonoBehaviour
         {
             float roundedZ = Mathf.Round(transform.position.z);
 
-            if (roundedZ != transform.position.z)
+            if (roundedZ == transform.position.z)
             {
                 Death("splash");
             }
@@ -114,16 +117,25 @@ public class GridMoveScript : MonoBehaviour
                     destination.x = Mathf.Round(destination.x);
                     //Debug.Log(destination.x);
                     canMove = false;
+                    score = getScore();
                 }
                 else
                 {
                     destination = transform.position + nextPos;
 
                     canMove = false;
+                    score = getScore();
                 }
             }
             
         }
+    }
+
+    private float getScore()
+    {
+        float score = 0;
+        score = transform.position.z;
+        return (score);
     }
 
     private void LogMove()
@@ -235,14 +247,12 @@ public class GridMoveScript : MonoBehaviour
         {
             case "splat":
                 this.transform.localScale = new Vector3(1.5f, .3f, 1.5f);
-                alive = false;
                 break;
             case "splash":
                 nextPos = Vector3.down;
                 destination = transform.position + nextPos;
                 canMove = false;
                 transform.position = Vector3.MoveTowards(transform.position, destination, speed * Time.deltaTime);
-                alive = false;
                 break;
             case "outtaBounds":
 
@@ -251,7 +261,7 @@ public class GridMoveScript : MonoBehaviour
                 Debug.Log("hey, how'd you end up dead anyway?");
                 break;
         }
-        
+        alive = false;
     }
 
 }
