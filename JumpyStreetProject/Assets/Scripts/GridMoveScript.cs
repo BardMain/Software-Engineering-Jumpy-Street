@@ -24,7 +24,6 @@ public class GridMoveScript : MonoBehaviour
     private bool canMove;
     private bool alive;
 
-<<<<<<< HEAD
     [HideInInspector]
     public bool onLand;
     [HideInInspector]
@@ -32,10 +31,8 @@ public class GridMoveScript : MonoBehaviour
 
     [HideInInspector]
     public int modelChoice;
-=======
     [SerializeField]
     private GameObject player;
->>>>>>> NelsonStart
 
     void Start()
     {
