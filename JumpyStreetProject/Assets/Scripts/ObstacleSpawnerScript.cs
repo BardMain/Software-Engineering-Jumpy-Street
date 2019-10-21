@@ -42,6 +42,9 @@ public class ObstacleSpawnerScript : MonoBehaviour
 
     private void CheckForSpawns()
     {
+        rdSpawns = GameObject.FindGameObjectsWithTag("ObsSpwnRd");
+        waterSpawns = GameObject.FindGameObjectsWithTag("WaterSpwnPnt");
+
         DeleteFarAway();
 
         //Debug.Log("checking now");
@@ -203,8 +206,6 @@ public class ObstacleSpawnerScript : MonoBehaviour
     //any spawns more than 5 units away are deleted
     private void DeleteFarAway()
     {
-        int toDeleteRd = -1;
-        int toDeleteWater = -1;
         if (rdSpawns.Length > 1)
         {
             for (int x = 0; x < rdSpawns.Length; x++)
@@ -212,15 +213,9 @@ public class ObstacleSpawnerScript : MonoBehaviour
                 float dist = ComparedDist(rdSpawns[x]);
                 if(dist > 5)
                 {
-                    toDeleteRd = x;
-                    //Destroy(rdSpawns[x]);
+                    Destroy(rdSpawns[x]);
                 }
             }
-        }
-
-        if(toDeleteRd > -1)
-        {
-            Destroy(rdSpawns[toDeleteRd]);
         }
 
         if(waterSpawns.Length > 1)
@@ -230,15 +225,9 @@ public class ObstacleSpawnerScript : MonoBehaviour
                 float dist = ComparedDist(waterSpawns[x]);
                 if (dist > 5)
                 {
-                    toDeleteWater = x;
-                    //Destroy(waterSpawns[x]);
+                    Destroy(waterSpawns[x]);
                 }
             }
-        }
-
-        if (toDeleteWater > -1)
-        {
-            Destroy(waterSpawns[toDeleteWater]);
         }
 
     }
