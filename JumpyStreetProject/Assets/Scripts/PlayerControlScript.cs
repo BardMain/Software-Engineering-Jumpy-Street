@@ -20,6 +20,7 @@ public class PlayerControlScript : MonoBehaviour
     private float speed = 4f;
     private float rayLength = 1f;
     private float inheritedSpeed = 0f;
+    private float gameEdge = 5f;
 
     [HideInInspector]
     public float score;
@@ -55,7 +56,7 @@ public class PlayerControlScript : MonoBehaviour
         nextPos = Vector3.forward;
         destination = transform.position;
 
-        HidePlayerModels();
+        
         ChooseModel(); //need to only do this once we have the proper value set
     }
 
@@ -80,6 +81,15 @@ public class PlayerControlScript : MonoBehaviour
         }
     }
 
+    private void CheckEdge()
+    {
+        float xPos = transform.position.x;
+        if((xPos > gameEdge) || (xPos < -gameEdge))
+        {
+            Death("outtaBounds");
+        }
+    }
+
     private void HidePlayerModels()
     {
         for (int x = 0; x < playerModels.Length; x++)
@@ -88,8 +98,9 @@ public class PlayerControlScript : MonoBehaviour
         }
     }
 
-    private void ChooseModel()
+    public void ChooseModel()
     {
+        HidePlayerModels();
         playerModels[modelChoice].SetActive(true);
     }
 
@@ -111,11 +122,11 @@ public class PlayerControlScript : MonoBehaviour
                 //the player from crashing into a wall they are halfway through
                 float roundedZ = Mathf.Round(transform.position.z);
 
-                if (roundedZ != transform.position.z)
+                if (roundedZ == transform.position.z)
                 {
                     destination = transform.position + nextPos;
                     destination.x = Mathf.Round(destination.x);
-                    //Debug.Log(destination.x);
+                    Debug.Log(destination.x);
                     canMove = false;
                     score = getScore();
                 }
@@ -141,7 +152,9 @@ public class PlayerControlScript : MonoBehaviour
     private void LogMove()
     {
         float roundedZ = Mathf.Round(transform.position.z);
-
+        ///////////////////////
+        ///LEFT OFF HERE, NEED TO ADJUST SIDEWAYS MOTION ON LOGS
+        ////////////////////////
         if (roundedZ == transform.position.z)
         {
             Vector3 toMove = Vector3.zero;
@@ -240,7 +253,7 @@ public class PlayerControlScript : MonoBehaviour
     }
 
     //Everything that happens in death should occur here
-    private void Death(string death)
+    public void Death(string death)
     {
         Debug.Log("you ded man");
         switch (death)
@@ -255,7 +268,7 @@ public class PlayerControlScript : MonoBehaviour
                 transform.position = Vector3.MoveTowards(transform.position, destination, speed * Time.deltaTime);
                 break;
             case "outtaBounds":
-
+                
                 break;
             default:
                 Debug.Log("hey, how'd you end up dead anyway?");

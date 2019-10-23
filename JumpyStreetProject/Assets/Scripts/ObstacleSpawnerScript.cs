@@ -11,20 +11,14 @@ public class ObstacleSpawnerScript : MonoBehaviour
     private List<GameObject> spawnedRdObj = new List<GameObject>();
     private GameObject[] rdSpawns = new GameObject[0];
 
-<<<<<<< HEAD
     public GameObject[] waterObstacles = new GameObject[1];
     private List<float> waterDirections = new List<float>();
     private List<GameObject> spawnedWaterObj = new List<GameObject>();
     private GameObject[] waterSpawns = new GameObject[0];
 
-    private float minTime = .5f;
-    private float maxTime = 2f;
-    private float gameEdge = 10f;
-=======
-    private float minTime = .8f;
+    private float minTime = .7f;
     private float maxTime = 2f;
     private float gameEdge = 16f;
->>>>>>> NelsonStart
 
     // Start is called before the first frame update
     void Start()
@@ -204,7 +198,7 @@ public class ObstacleSpawnerScript : MonoBehaviour
     //shows how far away player is from spawns
     private float ComparedDist(GameObject toCompare)
     {
-        float dist = GridMoveScript.instance.transform.position.z - toCompare.transform.position.z;
+        float dist = PlayerControlScript.instance.transform.position.z - toCompare.transform.position.z;
 
         return (dist);
     }

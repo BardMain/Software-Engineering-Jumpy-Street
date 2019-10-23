@@ -45,8 +45,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   roadObstacles:
   - {fileID: 3525497426458976159, guid: cf705886c0c22834f96e4051a4b10fce, type: 3}
-  - {fileID: 2962572977478127603, guid: 5ee172c00e61a334592f4861b97941b4, type: 3}
+  - {fileID: 8225282961564984074, guid: 5ee172c00e61a334592f4861b97941b4, type: 3}
   - {fileID: 3255983082252961458, guid: e6d8e69cbe4437b439899ff28ce101a7, type: 3}
   - {fileID: 9031580537118221376, guid: 9eb61498db95a1e42a60689f4bc4be43, type: 3}
+  - {fileID: 1602371699608303290, guid: ba7043b665d7ba64bacde028bead8b56, type: 3}
   waterObstacles:
   - {fileID: 3250326984253844749, guid: 15b45b61e1310764baf530459e6e47ca, type: 3}

@@ -5,6 +5,7 @@ using UnityEngine;
 public class CameraMoveScript : MonoBehaviour
 {
     public float acceptableDist;
+    public float deathDist;
     private float currentDist;
 
     // Start is called before the first frame update
@@ -23,9 +24,13 @@ public class CameraMoveScript : MonoBehaviour
         if(currentDist > acceptableDist)
         {
             Vector3 newPos = transform.position;
-            newPos.z = GridMoveScript.instance.transform.position.z - acceptableDist;
+            newPos.z = PlayerControlScript.instance.transform.position.z - acceptableDist;
 
             transform.position = newPos;
+        }
+        if(currentDist < deathDist)
+        {
+            PlayerControlScript.instance.Death("outtaBounds");
         }
     }
 
@@ -33,7 +38,7 @@ public class CameraMoveScript : MonoBehaviour
     {
         float distance = 0;
 
-        distance = GridMoveScript.instance.transform.position.z - transform.position.z;
+        distance = PlayerControlScript.instance.transform.position.z - transform.position.z;
 
         return(distance);
     }

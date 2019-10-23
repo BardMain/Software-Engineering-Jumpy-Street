@@ -75,7 +75,6 @@ public class GridMoveScript : MonoBehaviour
         if (alive)
         {
             Move();
-            Camera.main.gameObject.transform.position = player.transform.position + new Vector3(1f, 6f, 0.83f);
         }
         if (onLog)
         {
