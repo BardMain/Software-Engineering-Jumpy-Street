@@ -2,16 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ObstacleSpawnerScript : MonoBehaviour
+public class ObstacleSpawnBackupScript : MonoBehaviour
 {
-    public static ObstacleSpawnerScript instance;
+    public static ObstacleSpawnBackupScript instance;
 
     public GameObject[] roadObstacles = new GameObject[1];
     private List<float> rdDirections = new List<float>();
     private List<GameObject> spawnedRdObj = new List<GameObject>();
     private GameObject[] rdSpawns = new GameObject[0];
 
-<<<<<<< HEAD
     public GameObject[] waterObstacles = new GameObject[1];
     private List<float> waterDirections = new List<float>();
     private List<GameObject> spawnedWaterObj = new List<GameObject>();
@@ -20,11 +19,6 @@ public class ObstacleSpawnerScript : MonoBehaviour
     private float minTime = .5f;
     private float maxTime = 2f;
     private float gameEdge = 10f;
-=======
-    private float minTime = .8f;
-    private float maxTime = 2f;
-    private float gameEdge = 16f;
->>>>>>> NelsonStart
 
     // Start is called before the first frame update
     void Start()
@@ -59,7 +53,7 @@ public class ObstacleSpawnerScript : MonoBehaviour
 
         //The rest spawns obstacles from currently existing spawn points
         //Does so at staggered times
-        for(int x = 0; x < rdSpawns.Length; x++)
+        for (int x = 0; x < rdSpawns.Length; x++)
         {
             Vector3 pos = rdSpawns[x].transform.position;
             StartCoroutine(SpawnRdObs(pos));
@@ -83,15 +77,15 @@ public class ObstacleSpawnerScript : MonoBehaviour
         int toSpawn = Random.Range(0, roadObstacles.Length);
 
         Vector3 rotation = Vector3.zero;
-        float direction = 0; 
+        float direction = 0;
         //going left
-        if(pos.x > 0)
+        if (pos.x > 0)
         {
             direction = -5f;
-            rotation = new Vector3 (0, 270, 0);
+            rotation = new Vector3(0, 270, 0);
         }
         //going right
-        else if(pos.x < 0)
+        else if (pos.x < 0)
         {
             direction = 5f;
             rotation = new Vector3(0, 90, 0);
@@ -147,13 +141,13 @@ public class ObstacleSpawnerScript : MonoBehaviour
     {
         int toDeleteRd = -1;
         int toDeleteWater = -1;
-        for(int x = 0; x < spawnedRdObj.Count; x++)
+        for (int x = 0; x < spawnedRdObj.Count; x++)
         {
             float currentX = spawnedRdObj[x].transform.position.x;
             Vector3 toMove = Vector3.zero;
             toMove.x = rdDirections[x] * Time.deltaTime;
             spawnedRdObj[x].transform.position += toMove;
-            if(currentX > gameEdge || currentX < -gameEdge)
+            if (currentX > gameEdge || currentX < -gameEdge)
             {
                 toDeleteRd = x;
             }
@@ -183,16 +177,16 @@ public class ObstacleSpawnerScript : MonoBehaviour
             waterDirections.RemoveAt(toDeleteWater);
         }
     }
-    
+
     //The player is gonna use this to find the direction to go on a log
     public float HandOverThatFloat(Collider other)
     {
         float theChosenOne = 0f;
         int thisOne = 0;
 
-        for(int x = 0; x < spawnedWaterObj.Count; x++)
+        for (int x = 0; x < spawnedWaterObj.Count; x++)
         {
-            if(other.transform == spawnedWaterObj[x].transform)
+            if (other.transform == spawnedWaterObj[x].transform)
             {
                 thisOne = x;
             }
@@ -217,14 +211,14 @@ public class ObstacleSpawnerScript : MonoBehaviour
             for (int x = 0; x < rdSpawns.Length; x++)
             {
                 float dist = ComparedDist(rdSpawns[x]);
-                if(dist > 5)
+                if (dist > 5)
                 {
                     Destroy(rdSpawns[x]);
                 }
             }
         }
 
-        if(waterSpawns.Length > 1)
+        if (waterSpawns.Length > 1)
         {
             for (int x = 0; x < waterSpawns.Length; x++)
             {

@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GridMoveScript : MonoBehaviour
+public class PlayerControlScript : MonoBehaviour
 {
-    public static GridMoveScript instance;
+    public static PlayerControlScript instance;
     public GameObject[] playerModels = new GameObject[4];
 
     //gets relative directions
@@ -34,8 +34,6 @@ public class GridMoveScript : MonoBehaviour
 
     [HideInInspector]
     public int modelChoice;
-    [SerializeField]
-    private GameObject player;
 
     void Start()
     {
@@ -56,14 +54,14 @@ public class GridMoveScript : MonoBehaviour
         currentDir = up;
         nextPos = Vector3.forward;
         destination = transform.position;
-        
+
         HidePlayerModels();
         ChooseModel(); //need to only do this once we have the proper value set
     }
 
     void Update()
     {
-        if(!onLand && !onLog)
+        if (!onLand && !onLog)
         {
             float roundedZ = Mathf.Round(transform.position.z);
 
@@ -75,7 +73,6 @@ public class GridMoveScript : MonoBehaviour
         if (alive)
         {
             Move();
-            Camera.main.gameObject.transform.position = player.transform.position + new Vector3(1f, 6f, 0.83f);
         }
         if (onLog)
         {
@@ -85,7 +82,7 @@ public class GridMoveScript : MonoBehaviour
 
     private void HidePlayerModels()
     {
-        for(int x = 0; x < playerModels.Length; x++)
+        for (int x = 0; x < playerModels.Length; x++)
         {
             playerModels[x].SetActive(false);
         }
@@ -130,7 +127,7 @@ public class GridMoveScript : MonoBehaviour
                     score = getScore();
                 }
             }
-            
+
         }
     }
 
@@ -145,7 +142,7 @@ public class GridMoveScript : MonoBehaviour
     {
         float roundedZ = Mathf.Round(transform.position.z);
 
-        if(roundedZ == transform.position.z)
+        if (roundedZ == transform.position.z)
         {
             Vector3 toMove = Vector3.zero;
             toMove.x = inheritedSpeed * Time.deltaTime;
@@ -196,9 +193,9 @@ public class GridMoveScript : MonoBehaviour
 
         Debug.DrawRay(myRay.origin, myRay.direction, Color.red);
 
-        if(Physics.Raycast(myRay, out hit, rayLength))
+        if (Physics.Raycast(myRay, out hit, rayLength))
         {
-            if(hit.collider.tag == "Wall")
+            if (hit.collider.tag == "Wall")
             {
                 return false;
             }
@@ -211,7 +208,7 @@ public class GridMoveScript : MonoBehaviour
     {
         //Debug.Log("Hey I'm colliding over hea!");
 
-        if(other.gameObject.tag == "Killer")
+        if (other.gameObject.tag == "Killer")
         {
             Death("splat");
         }
