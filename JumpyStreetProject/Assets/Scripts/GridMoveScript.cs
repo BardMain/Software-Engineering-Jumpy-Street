@@ -21,6 +21,10 @@ public class GridMoveScript : MonoBehaviour
     private float rayLength = 1f;
     private float inheritedSpeed = 0f;
 
+    //Allison//
+    Animator animController;
+    int score;
+
     private bool canMove;
     private bool alive;
 
@@ -54,6 +58,11 @@ public class GridMoveScript : MonoBehaviour
         
         HidePlayerModels();
         ChooseModel(); //need to only do this once we have the proper value set
+
+        animController = GetComponent<Animator>();
+       // SetScoreText();
+        score = 0; 
+
     }
 
     void Update()
@@ -114,13 +123,25 @@ public class GridMoveScript : MonoBehaviour
                     destination.x = Mathf.Round(destination.x);
                     //Debug.Log(destination.x);
                     canMove = false;
+                    
+
+                    //Animaniacs();
+                    //Invoke("HaltAnimation", .5f);
                 }
                 else
                 {
                     destination = transform.position + nextPos;
 
                     canMove = false;
+                    Debug.Log("Moving");
+
+                    //Animaniacs();
+                    //Invoke("HaltAnimation", .5f);
                 }
+
+                //Debug.Log("Hoppity-Hop");
+                //animController.SetBool("isHopping", true);
+                //hopAnim.Play("hop");
             }
             
         }
@@ -164,6 +185,7 @@ public class GridMoveScript : MonoBehaviour
             nextPos = Vector3.right;
             currentDir = right;
             canMove = true;
+            
         }
         if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
         {
@@ -194,7 +216,7 @@ public class GridMoveScript : MonoBehaviour
     //Collider, use this when hitting an obstacle
     private void OnTriggerEnter(Collider other)
     {
-        //Debug.Log("Hey I'm colliding over hea!");
+        //Debug.Log("Hey I'm colliding over heyaaaaaarrhh!");
 
         if(other.gameObject.tag == "Killer")
         {
@@ -252,6 +274,23 @@ public class GridMoveScript : MonoBehaviour
                 break;
         }
         
+    }
+
+    private void DeathIsInevitable()//
+    {
+
+    }
+
+    void Animaniacs()
+    {
+        Debug.Log("Start hopping");
+        animController.SetBool("isHopping", true);
+    }
+
+    void HaltAnimation()
+    {
+        Debug.Log("Stop hopping");
+        animController.SetBool("isHopping", false);
     }
 
 }
