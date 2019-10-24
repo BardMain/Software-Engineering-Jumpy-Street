@@ -79,6 +79,7 @@ public class PlayerControlScript : MonoBehaviour
         {
             LogMove();
         }
+        CheckEdge();
     }
 
     private void CheckEdge()
@@ -184,17 +185,20 @@ public class PlayerControlScript : MonoBehaviour
             currentDir = down;
             canMove = true;
         }
-        if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
+        if (!onLog)
         {
-            nextPos = Vector3.right;
-            currentDir = right;
-            canMove = true;
-        }
-        if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
-        {
-            nextPos = Vector3.left;
-            currentDir = left;
-            canMove = true;
+            if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
+            {
+                nextPos = Vector3.right;
+                currentDir = right;
+                canMove = true;
+            }
+            if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
+            {
+                nextPos = Vector3.left;
+                currentDir = left;
+                canMove = true;
+            }
         }
     }
 
@@ -260,6 +264,9 @@ public class PlayerControlScript : MonoBehaviour
         {
             case "splat":
                 this.transform.localScale = new Vector3(1.5f, .3f, 1.5f);
+                Vector3 downSome = Vector3.zero;
+                downSome.y = .51f;
+                transform.position -= downSome;
                 break;
             case "splash":
                 nextPos = Vector3.down;

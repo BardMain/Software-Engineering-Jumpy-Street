@@ -20,6 +20,9 @@ public class ObstacleSpawnerScript : MonoBehaviour
     private float maxTime = 2f;
     private float gameEdge = 16f;
 
+    private float roadSpeed = 5f;
+    private float waterSpeed = 3f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -56,38 +59,34 @@ public class ObstacleSpawnerScript : MonoBehaviour
         for(int x = 0; x < rdSpawns.Length; x++)
         {
             Vector3 pos = rdSpawns[x].transform.position;
-            StartCoroutine(SpawnRdObs(pos));
+            StartCoroutine(SpawnRdObs(pos, roadSpeed, "road"));
         }
 
         for (int x = 0; x < waterSpawns.Length; x++)
         {
             Vector3 pos = waterSpawns[x].transform.position;
-            StartCoroutine(SpawnWaterObj(pos));
+            StartCoroutine(SpawnRdObs(pos, waterSpeed, "water"));
         }
 
         Invoke("CheckForSpawns", maxTime);
     }
 
     //Spawns objects and sets their direction based on spawn pos
-    IEnumerator SpawnRdObs(Vector3 pos)
+    IEnumerator SpawnRdObs(Vector3 pos, float direction, string type)
     {
         float waitTime = Random.Range(minTime, maxTime);
         yield return new WaitForSeconds(waitTime);
 
-        int toSpawn = Random.Range(0, roadObstacles.Length);
-
         Vector3 rotation = Vector3.zero;
-        float direction = 0; 
         //going left
         if(pos.x > 0)
         {
-            direction = -5f;
+            direction = -direction;
             rotation = new Vector3 (0, 270, 0);
         }
         //going right
         else if(pos.x < 0)
         {
-            direction = 5f;
             rotation = new Vector3(0, 90, 0);
         }
         //Uh oh
@@ -95,45 +94,27 @@ public class ObstacleSpawnerScript : MonoBehaviour
         {
             Debug.Log("Man, what did you do now?");
         }
-        //Spawns the objects and sets their rotation and direction
-        GameObject newObj = Instantiate(roadObstacles[toSpawn], pos, Quaternion.identity);
-        newObj.transform.localEulerAngles = rotation;
-        spawnedRdObj.Add(newObj);
-        rdDirections.Add(direction);
-    }
 
-    //For Spawning water objects
-    IEnumerator SpawnWaterObj(Vector3 pos)
-    {
-        float waitTime = Random.Range(minTime, maxTime);
-        yield return new WaitForSeconds(waitTime);
+        if (type == "road")
+        {
+            int toSpawn = Random.Range(0, roadObstacles.Length);
 
-        int toSpawn = Random.Range(0, waterObstacles.Length);
+            GameObject newObj = Instantiate(roadObstacles[toSpawn], pos, Quaternion.identity);
+            newObj.transform.localEulerAngles = rotation;
+            spawnedRdObj.Add(newObj);
+            rdDirections.Add(direction);
+        }
 
-        Vector3 rotation = Vector3.zero;
-        float direction = 0;
-        //going left
-        if (pos.x > 0)
+        else if (type == "water")
         {
-            direction = -3f;
-            rotation = new Vector3(0, 270, 0);
+            int toSpawn = Random.Range(0, waterObstacles.Length);
+
+            GameObject newObj = Instantiate(waterObstacles[toSpawn], pos, Quaternion.identity);
+            newObj.transform.localEulerAngles = rotation;
+            spawnedWaterObj.Add(newObj);
+            waterDirections.Add(direction);
         }
-        //going right
-        else if (pos.x < 0)
-        {
-            direction = 3f;
-            rotation = new Vector3(0, 90, 0);
-        }
-        //Uh oh
-        else
-        {
-            Debug.Log("Man, what did you do now?");
-        }
-        //Spawns the objects and sets their rotation and direction
-        GameObject newObj = Instantiate(waterObstacles[toSpawn], pos, Quaternion.identity);
-        newObj.transform.localEulerAngles = rotation;
-        spawnedWaterObj.Add(newObj);
-        waterDirections.Add(direction);
+
     }
 
     //Will need to incorporate pooling later
