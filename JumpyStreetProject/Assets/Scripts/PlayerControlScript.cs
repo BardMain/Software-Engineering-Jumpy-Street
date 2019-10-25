@@ -15,7 +15,7 @@ public class PlayerControlScript : MonoBehaviour
         currentDir = Vector3.zero;
 
     //to be filled in to see which way to face and which way to go
-    private Vector3 nextPos, destination, diection;
+    private Vector3 nextPos, destination, diection, startPos;
 
     private float speed = 4f;
     private float rayLength = 1f;
@@ -23,6 +23,15 @@ public class PlayerControlScript : MonoBehaviour
     private float gameEdge = 5f;
 
     [HideInInspector]
+    /////////////////////////////////////////////////
+    ///          ALLISON, CHECK HERE
+    ///          
+    /// the score updates whenever you move so to
+    /// access the current score just do:
+    /// 
+    ///     yourVariableHere = PlayerControlScript.instance.score;
+    /// 
+    ////////////////////////////////////////////////
     public float score;
 
     private bool canMove;
@@ -46,6 +55,8 @@ public class PlayerControlScript : MonoBehaviour
         {
             instance = this;
         }
+
+        startPos = transform.position;
 
         modelChoice = 0;
         alive = true;
@@ -99,6 +110,16 @@ public class PlayerControlScript : MonoBehaviour
         }
     }
 
+    /////////////////////////////////////////////////
+    ///          ALLISON, CHECK HERE
+    ///          
+    /// all you need to do here to selecte the player model
+    /// is to have whatever function you use execute the choose
+    /// model function below. That can be done with:
+    /// 
+    ///    PlayerControlScript.instance.ChooseModel();
+    /// 
+    ////////////////////////////////////////////////
     public void ChooseModel()
     {
         HidePlayerModels();
@@ -146,7 +167,7 @@ public class PlayerControlScript : MonoBehaviour
     private float getScore()
     {
         float score = 0;
-        score = transform.position.z;
+        score = transform.position.z -startPos.z;
         return (score);
     }
 
@@ -154,7 +175,7 @@ public class PlayerControlScript : MonoBehaviour
     {
         float roundedZ = Mathf.Round(transform.position.z);
         ///////////////////////
-        ///LEFT OFF HERE, NEED TO ADJUST SIDEWAYS MOTION ON LOGS
+        /// I want to adjust how lateral movement works on logs here
         ////////////////////////
         if (roundedZ == transform.position.z)
         {
@@ -282,6 +303,16 @@ public class PlayerControlScript : MonoBehaviour
                 break;
         }
         alive = false;
+
+        /////////////////////////////////////////////////
+        ///          ALLISON, CHECK HERE
+        ///          
+        /// whatever you want to happen on player death put here.
+        /// if you make your menu controller script into a Singleton
+        /// you can just have this function call that script's function,
+        /// or something like that
+        /// 
+        ////////////////////////////////////////////////
     }
 
 }
