@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerControlScript : MonoBehaviour
 {
@@ -21,6 +22,9 @@ public class PlayerControlScript : MonoBehaviour
     private float rayLength = 1f;
     private float inheritedSpeed = 0f;
     private float gameEdge = 5f;
+
+    //ScoreVariables
+    public Text scoreText; 
 
     [HideInInspector]
     public float score;
@@ -147,6 +151,11 @@ public class PlayerControlScript : MonoBehaviour
         float score = 0;
         score = transform.position.z;
         return (score);
+
+        scoreText.text = score.ToString();
+
+
+        PlayerPrefs.SetFloat("HighScore", score);
     }
 
     private void LogMove()
@@ -275,6 +284,14 @@ public class PlayerControlScript : MonoBehaviour
                 break;
         }
         alive = false;
+    }
+
+
+    //HANDLING SCORE
+    public void PlayerScoring()
+    {
+        //score++;
+        //scoreText.text = "Your Score " + score;
     }
 
 }

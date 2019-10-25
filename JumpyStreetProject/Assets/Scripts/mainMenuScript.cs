@@ -76,11 +76,11 @@ public class mainMenuScript : MonoBehaviour
         Debug.Log("Application Closed");
     }
 
-
-    //HANDLING SCORE
-    public void PlayerScoring()
+    public void SelectCat()
     {
-        score++;
-        scoreText.text = "Your Score " + score;
+        Debug.Log("Loading Level with Cat");
+        //PlayerControlScript.instance.ChooseModel();
+        PlayerControlScript.instance.playerModels[1].SetActive(true);
+        SceneManager.LoadScene("BlankScene");
     }
 }
