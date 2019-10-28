@@ -22,6 +22,11 @@ public class PlayerControlScript : MonoBehaviour
     private float inheritedSpeed = 0f;
     private float gameEdge = 5f;
 
+    //HANDLING ANIMATIONS
+    public Animation anim;
+
+
+    ///Handling Score
     [HideInInspector]
     /////////////////////////////////////////////////
     ///          ALLISON, CHECK HERE
@@ -294,6 +299,9 @@ public class PlayerControlScript : MonoBehaviour
                 destination = transform.position + nextPos;
                 canMove = false;
                 transform.position = Vector3.MoveTowards(transform.position, destination, speed * Time.deltaTime);
+
+                anim.Play("waterSplash");
+
                 break;
             case "outtaBounds":
                 
