@@ -13,6 +13,9 @@ public class HoldCharacterSelect : MonoBehaviour
     {
         DontDestroyOnLoad(gameObject);
         CharacterSelect = this;
+
+        if (CharacterSelect != this)
+            Destroy(this);
     }
 
     public void SetCharacter(int selection)
