@@ -77,10 +77,5 @@ public class mainMenuScript : MonoBehaviour
     }
 
 
-    //HANDLING SCORE
-    public void PlayerScoring()
-    {
-        score++;
-        scoreText.text = "Your Score " + score;
-    }
+  
 }
