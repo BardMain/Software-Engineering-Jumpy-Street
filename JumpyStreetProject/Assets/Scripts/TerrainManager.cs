@@ -10,16 +10,12 @@ public class TerrainManager : MonoBehaviour
     [SerializeField]
     int chunkIndex = 0;
 
-    int distanceTraveled = 0;
+    float distanceTraveled = 0f;
     int lastRandom = -1; //Proper value assigned in SelectChunk(), avoids the same chunk spawning multiple times in a row
-
-    GameObject player;
 
     // Start is called before the first frame update
     void Start()
     {
-        player = GameObject.Find("PlayerObject");
-
         GameObject spawnChunk = chunks[0]; //Define the starting chunk which has no obstacles
 
         SpawnChunk(chunkIndex, spawnChunk); //Instantiate the starting chunk at index = 0
@@ -29,7 +25,7 @@ public class TerrainManager : MonoBehaviour
 
     private void Update()
     {
-        distanceTraveled = Mathf.RoundToInt(player.transform.position.z); //
+        distanceTraveled = PlayerControlScript.instance.score; //Find how far forwards the player has travelled
 
         if(distanceTraveled % 8 == 0 && distanceTraveled > ((chunkIndex - 2) * 8)) //If the player has finished walking through their current chunk AND less than 2 chunks are loaded ahead of the player...
         {
@@ -53,7 +49,7 @@ public class TerrainManager : MonoBehaviour
 
         ++chunkIndex; //Increment the chunkIndex so the next time that SpawnChunk is called, the chunk is spawned 8 units ahead
 
-        lastRandom = random;
+        lastRandom = random; //Update lastRandom so this new chunk is not spawned multiple times in a row
 
         return chunkToSpawn;
     }

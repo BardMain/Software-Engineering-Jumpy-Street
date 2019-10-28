@@ -72,8 +72,8 @@ public class mainMenuScript : MonoBehaviour
 
     public void YesButton()
     {
-        Application.Quit();
         Debug.Log("Application Closed");
+        Application.Quit();
     }
 
 

@@ -68,7 +68,7 @@ public class PlayerControlScript : MonoBehaviour
         destination = transform.position;
 
         
-        ChooseModel(); //need to only do this once we have the proper value set
+        ChooseModel(HoldCharacterSelect.CharacterSelect.characterSelected);
     }
 
     void Update()
@@ -120,10 +120,10 @@ public class PlayerControlScript : MonoBehaviour
     ///    PlayerControlScript.instance.ChooseModel();
     /// 
     ////////////////////////////////////////////////
-    public void ChooseModel()
+    public void ChooseModel(int selection)
     {
         HidePlayerModels();
-        playerModels[modelChoice].SetActive(true);
+        playerModels[selection].SetActive(true);
     }
 
     //Handles where you gonna move

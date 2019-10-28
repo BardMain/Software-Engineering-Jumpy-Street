@@ -154,7 +154,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.1325625, y: 0.32922223}
   m_AnchorMax: {x: 0.8595625, y: 0.4303889}
-  m_AnchoredPosition: {x: 1.300003, y: -3.5}
+  m_AnchoredPosition: {x: 1.2999878, y: -3.5}
   m_SizeDelta: {x: 3.2999878, y: -7.8999996}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &176706109
@@ -763,7 +763,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.312, y: 0.711}
   m_AnchorMax: {x: 0.68981254, y: 0.98200005}
-  m_AnchoredPosition: {x: -1.0000153, y: -5.5}
+  m_AnchoredPosition: {x: -1.0000305, y: -5.5}
   m_SizeDelta: {x: -11.299988, y: 1.6000061}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &889200902
@@ -891,7 +891,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1171632945
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1488,7 +1488,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.1325625, y: 0.5}
   m_AnchorMax: {x: 0.8595625, y: 0.5902223}
-  m_AnchoredPosition: {x: -3.199997, y: 0.049999237}
+  m_AnchoredPosition: {x: -3.2000122, y: 0.049999237}
   m_SizeDelta: {x: 12.790009, y: 0.099998474}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2101289192
@@ -1598,6 +1598,26 @@ PrefabInstance:
     - target: {fileID: 295119174480778135, guid: 11b157e9089b57747b2e53326c14701a,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5064671770706649731, guid: 11b157e9089b57747b2e53326c14701a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5853462822283508612, guid: 11b157e9089b57747b2e53326c14701a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6202258840685233458, guid: 11b157e9089b57747b2e53326c14701a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1605968975108086579, guid: 11b157e9089b57747b2e53326c14701a,
+        type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
