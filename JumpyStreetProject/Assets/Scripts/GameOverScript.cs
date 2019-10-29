@@ -79,7 +79,7 @@ public class GameOverScript : MonoBehaviour
         scorePanel.SetActive(true);
         score.SetActive(false);
         Debug.Log("Score Board Open");
-    }
+    } 
 
     private void SplashAnim()
     {
