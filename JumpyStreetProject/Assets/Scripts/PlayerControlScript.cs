@@ -7,6 +7,7 @@ public class PlayerControlScript : MonoBehaviour
     public static PlayerControlScript instance;
     public GameObject[] playerModels = new GameObject[4];
 
+
     //gets relative directions
     private Vector3 up = Vector3.zero,
         right = new Vector3(0, 90, 0),
@@ -22,8 +23,8 @@ public class PlayerControlScript : MonoBehaviour
     private float inheritedSpeed = 0f;
     private float gameEdge = 5f;
 
-    //HANDLING ANIMATIONS
-    public Animation anim;
+    //HANDLING 'ANIMATIONS'
+    //public Transform player;
 
 
     ///Handling Score
@@ -293,14 +294,16 @@ public class PlayerControlScript : MonoBehaviour
                 Vector3 downSome = Vector3.zero;
                 downSome.y = .51f;
                 transform.position -= downSome;
+
+
                 break;
+
             case "splash":
                 nextPos = Vector3.down;
                 destination = transform.position + nextPos;
                 canMove = false;
                 transform.position = Vector3.MoveTowards(transform.position, destination, speed * Time.deltaTime);
 
-                anim.Play("waterSplash");
 
                 break;
             case "outtaBounds":
@@ -311,6 +314,8 @@ public class PlayerControlScript : MonoBehaviour
                 break;
         }
         alive = false;
+
+        GameOverScript.instance.InvokeMeDaddy();
 
         /////////////////////////////////////////////////
         ///          ALLISON, CHECK HERE

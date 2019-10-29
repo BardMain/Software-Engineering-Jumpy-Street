@@ -6,7 +6,10 @@ using UnityEngine.SceneManagement;
 
 public class GameOverScript : MonoBehaviour
 {
-   //Transforms
+
+    public static GameOverScript instance;
+
+    //Transforms
     public Transform player;
 
     ///Texts
@@ -18,13 +21,29 @@ public class GameOverScript : MonoBehaviour
     public GameObject menuButton;
     public GameObject endButton;
 
+    public GameObject score;
+
+
+    public GameObject splashAnim;
+    public GameObject splatAnim;
 
     ///Audio
     public AudioClip bg;
+    AudioSource splashAudio;
+    AudioSource splatAudio;
 
     public void Start()
     {
-        //
+
+        if (instance != null && instance != this)
+        {
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            instance = this;
+        }
+        scorePanel.SetActive(false);
     }
 
     public void menuLoad()
@@ -46,7 +65,24 @@ public class GameOverScript : MonoBehaviour
 
     public void Update()
     {
-        scoreText.text = player.position.z.ToString("0");
+        int score = Mathf.FloorToInt(player.position.z) - 5;
+        scoreText.text = "Score: " + score.ToString();
     }
 
-}
+    public void InvokeMeDaddy()
+    {
+        Invoke("OpenPanel", 1f);
+    }
+
+    private void OpenPanel()
+    {
+        scorePanel.SetActive(true);
+        score.SetActive(false);
+        Debug.Log("Score Board Open");
+    }
+
+    private void SplashAnim()
+    {
+        Instantiate(splashAnim, PlayerControlScript.instance.transform);
+    }
+} 

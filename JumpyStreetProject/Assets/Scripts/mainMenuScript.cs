@@ -6,11 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class mainMenuScript : MonoBehaviour
 {
-    //Int values
-   public int score = 0;
   
-
-
     ///Texts
     public Text titleText;
     public Text scoreText;
@@ -75,7 +71,4 @@ public class mainMenuScript : MonoBehaviour
         Application.Quit();
         Debug.Log("Application Closed");
     }
-
-
-  
 }
