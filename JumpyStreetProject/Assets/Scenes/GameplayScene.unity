@@ -641,11 +641,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 7129301725035931147}
   scoreText: {fileID: 1316713691}
+  playerEndScore: {fileID: 176706109}
+  highScoreText: {fileID: 2101289192}
   scorePanel: {fileID: 1171632944}
   replayButton: {fileID: 1746841039}
   menuButton: {fileID: 1325250651}
   endButton: {fileID: 851562653}
-  score: {fileID: 1316713688}
+  scoreObject: {fileID: 1316713688}
   splashAnim: {fileID: 7917612312785392882, guid: 166d40be31423fa4ca221f68cfeffbea,
     type: 3}
   splatAnim: {fileID: 0}
@@ -1731,7 +1733,7 @@ GameObject:
   - component: {fileID: 2101289192}
   m_Layer: 5
   m_Name: highScoreText
-  m_TagString: Untagged
+  m_TagString: highscore
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

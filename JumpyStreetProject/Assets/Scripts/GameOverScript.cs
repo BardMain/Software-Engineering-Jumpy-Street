@@ -14,6 +14,8 @@ public class GameOverScript : MonoBehaviour
 
     ///Texts
     public Text scoreText;
+    public Text playerEndScore;
+    public Text highScoreText;
 
     ///Game Objects
     public GameObject scorePanel;
@@ -21,11 +23,14 @@ public class GameOverScript : MonoBehaviour
     public GameObject menuButton;
     public GameObject endButton;
 
-    public GameObject score;
+    public GameObject scoreObject;
 
 
     public GameObject splashAnim;
     public GameObject splatAnim;
+
+    private int scoreValue;
+    private static int highScoreValue;
 
     ///Audio
     public AudioClip bg;
@@ -44,6 +49,10 @@ public class GameOverScript : MonoBehaviour
             instance = this;
         }
         scorePanel.SetActive(false);
+        scoreValue = 0;
+
+        highScoreValue = PlayerPrefs.GetInt("highscore", highScoreValue);
+        highScoreText.text = "High Score: " + highScoreValue.ToString();
     }
 
     public void menuLoad()
@@ -65,8 +74,17 @@ public class GameOverScript : MonoBehaviour
 
     public void Update()
     {
-        int score = Mathf.FloorToInt(player.position.z) - 5;
-        scoreText.text = "Score: " + score.ToString();
+        scoreValue = Mathf.FloorToInt(player.position.z) - 5;
+        scoreText.text = "Score: " + scoreValue.ToString();
+
+        if (scoreValue > highScoreValue)
+        {
+            highScoreValue = scoreValue;
+            highScoreText.text = "Highscore " + scoreValue;
+
+            PlayerPrefs.SetInt("highscore", highScoreValue);
+        }
+        
     }
 
     public void InvokeMeDaddy()
@@ -77,7 +95,9 @@ public class GameOverScript : MonoBehaviour
     private void OpenPanel()
     {
         scorePanel.SetActive(true);
-        score.SetActive(false);
+        scoreObject.SetActive(false);
+        playerEndScore.text = "Player Score: " + scoreValue.ToString();
+
         Debug.Log("Score Board Open");
     } 
 
