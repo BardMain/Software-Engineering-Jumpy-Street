@@ -169,7 +169,7 @@ MonoBehaviour:
   m_Script: {fileID: 1980459831, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}
@@ -572,7 +572,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9053f6806e967494a99a6a376c2116c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  score: 0
   titleText: {fileID: 54682834}
   scoreText: {fileID: 0}
   startButton: {fileID: 1513616044}
